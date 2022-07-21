@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ランダム文字列ジェネレーター</title>
+</head>
+<body>
+	<h1>ランダム文字列ジェネレーター</h1>
+
+    <form action="/generate" method="post">
+    <p>
+        <select name="charLength">
+            <option th:each = "i : ${#numbers.sequence(5, 10)}" th:value="${i}" th:selected="${i==charLen}" th:text="${i} + '文字'"></option>
+        </select>
+        <input type="checkbox" name="withNumber" th:selected="1" value="1">数字を含める
+        <input type="checkbox" name="withLanguage" th:selected="1" value="1">英字を含める
+    </p>
+    <p>
+    	<input type = "textbox" name = "count" th:value = "${count}" placeholder = "〇個">個生成する
+    <p>
+        <input type="submit" value="作成する">
+    </p>
+    </form>
+
+    <hr>
+    <table>
+        <tr th:each="str:${randList}">
+            <td th:text="${str}"></td>
+        </tr>
+    </table>
+</body>
+</html>
